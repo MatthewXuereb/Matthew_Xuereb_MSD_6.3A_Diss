@@ -1,0 +1,11 @@
+#pragma kernel AddRain
+
+RWStructuredBuffer<float2> water;
+
+float uniformRainAmount;
+
+[numthreads(1024, 1, 1)]
+void AddRain (uint3 id : SV_DispatchThreadID)
+{
+	water[id.x].x += uniformRainAmount;
+}

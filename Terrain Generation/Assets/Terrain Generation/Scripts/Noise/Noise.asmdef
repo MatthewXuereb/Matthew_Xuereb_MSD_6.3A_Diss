@@ -1,0 +1,18 @@
+{
+    "name": "Noise",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d8b63aba1907145bea998dd612889d6b",
+        "GUID:9d23b3f8a0e97ac4db252e3f9ae8380b",
+        "GUID:788b3ec655f7d0043aefb58279e57a88"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,75 @@
+#pragma kernel Thermal
+
+StructuredBuffer<int4> ids;
+StructuredBuffer<int4> ids2;
+
+RWStructuredBuffer<float2> heights;
+RWStructuredBuffer<float2> water;
+
+float timeStep;
+float slippageRate;
+float diagonalLengh;
+float minAngleInRadians;
+
+float2 cellLength;
+
+float CalculateHeightDiffrence(float current, float neighbor, float length)
+{
+    return (current - neighbor) / length;
+}
+
+bool ValidAngle(float heightDiffrence, float minAngleInRadians)
+{
+    return abs(heightDiffrence) > minAngleInRadians ? true : false;
+}
+
+[numthreads(1024,1,1)]
+void Thermal (uint3 id : SV_DispatchThreadID)
+{
+    float currentHeight = heights[id.x].x;
+    float maxDepth = 0.0f;
+
+    float lHD = CalculateHeightDiffrence(currentHeight, heights[ids[id.x].x].x, cellLength.x);
+    float rHD = CalculateHeightDiffrence(currentHeight, heights[ids[id.x].y].x, cellLength.x);
+    float bHD = CalculateHeightDiffrence(currentHeight, heights[ids[id.x].z].x, cellLength.y);
+    float tHD = CalculateHeightDiffrence(currentHeight, heights[ids[id.x].w].x, cellLength.y);
+    float bLHD = CalculateHeightDiffrence(currentHeight, heights[ids2[id.x].x].x, diagonalLengh);
+    float bRHD = CalculateHeightDiffrence(currentHeight, heights[ids2[id.x].y].x, diagonalLengh);
+    float tLHD = CalculateHeightDiffrence(currentHeight, heights[ids2[id.x].z].x, diagonalLengh);
+    float tRHD = CalculateHeightDiffrence(currentHeight, heights[ids2[id.x].w].x, diagonalLengh);
+
+    bool lB = ValidAngle(lHD, minAngleInRadians);
+    bool rB = ValidAngle(rHD, minAngleInRadians);
+    bool bB = ValidAngle(bHD, minAngleInRadians);
+    bool tB = ValidAngle(tHD, minAngleInRadians);
+    bool bLB = ValidAngle(bLHD, minAngleInRadians);
+    bool bRB = ValidAngle(bRHD, minAngleInRadians);
+    bool tLB = ValidAngle(tLHD, minAngleInRadians);
+    bool tRB = ValidAngle(tRHD, minAngleInRadians);
+
+    maxDepth += lB ? lHD : 0.0f;
+    maxDepth += rB ? rHD : 0.0f;
+    maxDepth += bB ? bHD : 0.0f;
+    maxDepth += tB ? tHD : 0.0f;
+    maxDepth += bLB ? bLHD : 0.0f;
+    maxDepth += bRB ? bRHD : 0.0f;
+    maxDepth += tLB ? tLHD : 0.0f;
+    maxDepth += tRB ? tRHD : 0.0f;
+
+    heights[id.x].y = heights[id.x].x;
+    if (maxDepth != 0.0f)//&& water[id.x].x < 0.05f)
+    {
+        float scale = timeStep * (maxDepth / 2.0f);
+
+        float erodeBy = lB ? scale * (lHD / maxDepth) : 0.0f;
+        erodeBy += rB ? scale * (rHD / maxDepth) : 0.0f;
+        erodeBy += bB ? scale * (bHD / maxDepth) : 0.0f;
+        erodeBy += tB ? scale * (tHD / maxDepth) : 0.0f;
+        erodeBy += bLB ? scale * (bLHD / maxDepth) : 0.0f;
+        erodeBy += bRB ? scale * (bRHD / maxDepth) : 0.0f;
+        erodeBy += tLB ? scale * (tLHD / maxDepth) : 0.0f;
+        erodeBy += tRB ? scale * (tRHD / maxDepth) : 0.0f;
+
+        heights[id.x].y = heights[id.x].x - erodeBy * slippageRate;
+    }
+}

@@ -2,19 +2,19 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Mm]emoryCaptures/
+Terrain Generation/[Ll]ibrary/
+Terrain Generation/[Tt]emp/
+Terrain Generation/[Oo]bj/
+Terrain Generation/[Bb]uild/
+Terrain Generation/[Bb]uilds/
+Terrain Generation/[Ll]ogs/
+Terrain Generation/[Mm]emoryCaptures/
 
 # Never ignore Asset meta data
-!/[Aa]ssets/**/*.meta
+!Terrain Generation/[Aa]ssets/**/*.meta
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
-# /[Aa]ssets/AssetStoreTools*
+# Terrain Generation/[Aa]ssets/AssetStoreTools*
 
 # TextMesh Pro files
 [Aa]ssets/TextMesh*Pro/

@@ -1,0 +1,81 @@
+#pragma kernel Hydraulic
+
+StructuredBuffer<int4> ids;
+StructuredBuffer<int2> coords;
+
+RWStructuredBuffer<float2> heights;
+RWStructuredBuffer<float2> water;
+RWStructuredBuffer<float2> susSediment;
+RWStructuredBuffer<float4> velocity;
+
+float timeStep;
+
+float sedimentCarryCapicity;
+float erosionRate;
+float depositionRate;
+
+float minSlope;
+float maxDepth;
+
+float2 cellLength;
+
+float CalcualteAngle(int i)
+{
+    float current = heights[i].x + susSediment[i].x;
+    float left = heights[ids[i].x].x + susSediment[ids[i].x].x;
+    float right = heights[ids[i].y].x + susSediment[ids[i].y].x;
+    float bottom = heights[ids[i].z].x + susSediment[ids[i].z].x;
+    float top = heights[ids[i].w].x + susSediment[ids[i].w].x;
+
+    float slope = minSlope;
+    slope = max(slope, (current - left) / cellLength.x);
+    slope = max(slope, (current - right) / cellLength.x);
+    slope = max(slope, (current - bottom) / cellLength.y);
+    slope = max(slope, (current - top) / cellLength.y);
+
+    return slope;
+}
+
+float GetVelocity(int i)
+{
+    float horizontal = abs(velocity[i].x + velocity[i].y) / 2.0f;
+    float vertical = abs(velocity[i].z + velocity[i].w) / 2.0f;
+
+    return horizontal + vertical;
+}
+
+float StreamPower(int i)
+{
+    return sqrt(CalcualteAngle(i) * GetVelocity(i));
+}
+
+float Ramp(float v)
+{
+    if (v <= 0.0f)
+        return 0.0f;
+    else if (v >= maxDepth)
+        return 1.0f;
+    else
+        return 1.0f - (maxDepth - v) / maxDepth;
+}
+
+[numthreads(1024,1,1)]
+void Hydraulic(uint3 id : SV_DispatchThreadID)
+{
+    float carryCapacity = sedimentCarryCapicity * StreamPower(id.x) * Ramp(water[id.x].x);
+
+    float modify = 0.0f;
+    if (susSediment[id.x].x > water[id.x].x)
+        modify = -(timeStep * depositionRate * (susSediment[id.x].x - water[id.x].x));
+    else
+        if (carryCapacity > susSediment[id.x].x)
+            modify = timeStep * erosionRate * (carryCapacity - susSediment[id.x].x);
+        else
+            modify = -(timeStep * depositionRate * (susSediment[id.x].x - carryCapacity));
+
+    heights[id.x].y = heights[id.x].x - modify;
+    water[id.x].y = water[id.x].x + modify;
+    //if (water[id.x].y < 0.0f) water[id.x].y = 0.0f;
+    susSediment[id.x].y = susSediment[id.x].x + modify;
+    //if (susSediment[id.x].y < 0.0f) susSediment[id.x].y = 0.0f;
+}

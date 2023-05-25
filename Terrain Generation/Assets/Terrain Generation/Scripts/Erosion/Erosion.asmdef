@@ -1,0 +1,19 @@
+{
+    "name": "Erosion",
+    "rootNamespace": "",
+    "references": [
+        "GUID:60ca20a18b374cd449c09f6a3a07fb20",
+        "GUID:9265a16e6b609114593299ec30c322ae",
+        "GUID:d8b63aba1907145bea998dd612889d6b",
+        "GUID:788b3ec655f7d0043aefb58279e57a88"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,11 @@
+#pragma kernel Evaporate
+
+RWStructuredBuffer<float2> water;
+
+float evaporationRate;
+
+[numthreads(1024, 1, 1)]
+void Evaporate (uint3 id : SV_DispatchThreadID)
+{
+	water[id.x].x = max(0.0f, water[id.x].x - evaporationRate);
+}

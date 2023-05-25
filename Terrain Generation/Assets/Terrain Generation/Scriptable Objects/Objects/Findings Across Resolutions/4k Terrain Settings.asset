@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7552339bea6732340bdccdd4d7e9ee82, type: 3}
+  m_Name: 4k Terrain Settings
+  m_EditorClassIdentifier: Assembly-CSharp::OTerrainSettings
+  res:
+    x: 4097
+    y: 4097
+  height: 1024
+  seaLevel: 480
+  cellLength:
+    x: 1
+    y: 1
+  landmass: {fileID: 2100000, guid: f843a40da9048a94da77540fe382f1c5, type: 2}
+  water: {fileID: 2100000, guid: ee989ad74f895394888eea3809ab8e90, type: 2}

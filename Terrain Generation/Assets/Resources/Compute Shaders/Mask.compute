@@ -1,0 +1,51 @@
+#pragma kernel Mask
+
+StructuredBuffer<int2> coords;
+
+RWStructuredBuffer<float> mask;
+
+int canvasSize;
+
+float res, halfRes;
+float radius;
+float stregth;
+
+float2 offset, scale;
+
+float sin, cos;
+
+float EaseOutCurve(float v)
+{
+	return pow(v, abs(stregth));
+}
+
+float InverseLerp(float min, float max, float t)
+{
+	return (t - min) / (max - min);
+}
+
+[numthreads(1024,1,1)]
+void Mask (uint3 id : SV_DispatchThreadID)
+{
+	float xC = canvasSize * ((float)coords[id.x].x / (float)res);
+	xC -= canvasSize / 2;
+	xC -= offset.x;
+
+	float yC = canvasSize * ((float)coords[id.x].y / (float)res);
+	yC -= canvasSize / 2;
+	yC -= offset.y;
+
+	float xR = xC * cos - yC * sin;
+	xR /= scale.x;
+	float yR = xC * sin + yC * cos;
+	yR /= scale.y;
+
+	float v = sqrt(
+		pow(xR, 2) +
+		pow(yR, 2)
+	);
+	v = InverseLerp(0.0f, radius, v);
+	v = 1.0f - EaseOutCurve(v);
+
+	mask[id.x] = v;
+}

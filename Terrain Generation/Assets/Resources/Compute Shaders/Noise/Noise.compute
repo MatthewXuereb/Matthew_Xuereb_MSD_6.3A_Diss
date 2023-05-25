@@ -1,0 +1,72 @@
+#pragma kernel CSMain
+
+#include "Assets/Resources/Compute Shaders/Noise/FastNoiseLite.hlsl"
+
+RWStructuredBuffer<float> noiseMap;
+
+int resolution;
+
+float2 offset;
+
+float invert;
+
+// Noise
+int fractalSeed;
+int fractalOctaves;
+float fractalFrequency;
+float fractalLacunarity;
+float fractalGain;
+float weightedStrength;
+
+int fractalType;
+
+// Warp
+int warpSeed;
+int warpOctaves;
+float warpFrequency;
+float warpLacunarity;
+float warpGain;
+float domainWarpAmp;
+
+int warpFractalType;
+
+[numthreads(32, 32, 1)]
+void CSMain(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x < resolution && id.y < resolution)
+	{
+		fnl_state noise = fnlCreateState();
+		fnl_state warp = fnlCreateState();
+
+		// Noise
+		noise.noise_type = 3;
+		noise.fractal_type = fractalType;
+
+		noise.seed = fractalSeed;
+		noise.frequency = fractalFrequency;
+		noise.octaves = fractalOctaves;
+		noise.lacunarity = fractalLacunarity;
+		noise.gain = fractalGain;
+		noise.weighted_strength = weightedStrength;
+
+		// Warp
+		warp.fractal_type = warpFractalType;
+		warp.domain_warp_type = 0;
+
+		warp.seed = warpSeed;
+		warp.frequency = warpFrequency;
+		warp.octaves = warpOctaves;
+		warp.lacunarity = warpLacunarity;
+		warp.gain = warpGain;
+		warp.domain_warp_amp = domainWarpAmp;
+
+		float xP = id.x + offset.x;
+		float yP = id.y + offset.y;
+
+		fnlDomainWarp2D(warp, xP, yP);
+		float n = (fnlGetNoise2D(noise, xP, yP) + 1) / 2;
+		n = clamp(n, 0, 1);
+
+		noiseMap[(id.y) * resolution + (id.x)] = abs(invert - n);
+	}
+}

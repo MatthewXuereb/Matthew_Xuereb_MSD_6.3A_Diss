@@ -1,0 +1,25 @@
+#pragma kernel ShiftHeights
+#pragma kernel ShiftWater
+#pragma kernel ShiftSediment
+
+RWStructuredBuffer<float2> heights;
+RWStructuredBuffer<float2> water;
+RWStructuredBuffer<float2> susSediment;
+
+[numthreads(1024, 1, 1)]
+void ShiftHeights (uint3 id : SV_DispatchThreadID)
+{
+	heights[id.x].x = heights[id.x].y;
+}
+
+[numthreads(1024, 1, 1)]
+void ShiftWater(uint3 id : SV_DispatchThreadID)
+{
+	water[id.x].x = water[id.x].y;
+}
+
+[numthreads(1024, 1, 1)]
+void ShiftSediment(uint3 id : SV_DispatchThreadID)
+{
+	susSediment[id.x].x = susSediment[id.x].y;
+}

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27df7e96d9c4e054aa654c546694d40a, type: 3}
+  m_Name: Oak Tree
+  m_EditorClassIdentifier: 
+  id: 0
+  vegatationObjects:
+  - {fileID: 1485145988911329059, guid: 1b323422438057e4cb00a8e96866d859, type: 3}
+  - {fileID: 4754451832049290363, guid: 78de3af7ba376e0438633c337c9dcec9, type: 3}
+  - {fileID: 6618158521167236149, guid: 3cdc8041fa2fd094ea087ca022051ddd, type: 3}
+  - {fileID: 8502579871394470083, guid: 2fcd09d4ddfdd9541b7d59c206f010cd, type: 3}
+  - {fileID: 7217575115077337262, guid: 662a00c91e08f5d4bb2b86fbf1e4467d, type: 3}
+  lifespan: 36
+  fertilityAge: 20
+  maxDiameter: 2
+  spawnRate: 60
+  seedSpread: 10
+  minHeight: 0
+  maxHeight: 4096
+  minScale: 1
+  maxScale: 1.3
+  maxAngle: 30
+  maxPivot: 3

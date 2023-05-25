@@ -1,0 +1,25 @@
+#pragma kernel CalcualteVelocity
+
+StructuredBuffer<int4> ids;
+StructuredBuffer<int2> coords;
+
+RWStructuredBuffer<float4> flux;
+RWStructuredBuffer<float4> velocity;
+
+float2 res;
+
+[numthreads(1024, 1, 1)]
+void CalcualteVelocity (uint3 id : SV_DispatchThreadID)
+{
+    velocity[id.x].x = flux[id.x].x;
+    velocity[id.x].x += coords[id.x].x - 1 < 0 ? 0.0f : flux[id.x - 1].y;
+
+    velocity[id.x].y = flux[id.x].y;
+    velocity[id.x].y += coords[id.x].x + 1 > res.x - 1 ? 0.0f : flux[id.x + 1].x;
+
+    velocity[id.x].z = flux[id.x].z;
+    velocity[id.x].z += coords[id.x].y - 1 < 0 ? 0.0f : flux[id.x - res.y].w;
+
+    velocity[id.x].w = flux[id.x].w;
+    velocity[id.x].w += coords[id.x].y + 1 > res.y - 1 ? 0.0f : flux[id.x + res.y].z;
+}

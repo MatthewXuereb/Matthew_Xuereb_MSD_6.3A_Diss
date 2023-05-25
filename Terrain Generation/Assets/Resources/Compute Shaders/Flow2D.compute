@@ -1,0 +1,117 @@
+#pragma kernel CalcualteFlow
+#pragma kernel CalcualteTotalFlow
+#pragma kernel CalcualteSedimentFlow
+#pragma kernel CalcualteSedimentTotalFlow
+
+StructuredBuffer<int4> indices;
+StructuredBuffer<int2> coords;
+
+StructuredBuffer<float2> heights; // HeightsCurr, HeightsNext
+RWStructuredBuffer<float2> water; // Curr, Next
+RWStructuredBuffer<float2> sediment; // Curr, Next
+
+RWStructuredBuffer<float4> waterFlux; // Left, Right, Bottom, Top
+RWStructuredBuffer<float4> sedimentFlux; // Left, Right, Bottom, Top
+
+uint arrLen;
+
+float timeStep;
+
+float cSA;
+float gravity;
+
+float2 res;
+float2 cellLength;
+
+float GetFlowValue(float heightDiffrence, float length)
+{
+    return max(0.0f, timeStep * cSA * (gravity * heightDiffrence) / length);
+}
+
+[numthreads(1024, 1, 1)]
+void CalcualteFlow(uint3 id : SV_DispatchThreadID)
+{
+    int l = indices[id.x].x;
+    int r = indices[id.x].y;
+    int b = indices[id.x].z;
+    int t = indices[id.x].w;
+
+    float current = heights[id.x].x + water[id.x].x;
+    float left = heights[l].x + water[l].x;
+    float right = heights[r].x + water[r].x;
+    float bottom = heights[b].x + water[b].x;
+    float top = heights[t].x + water[t].x;
+
+    waterFlux[id.x].x += GetFlowValue(current - left, cellLength.x);
+    waterFlux[id.x].y += GetFlowValue(current - right, cellLength.x);
+    waterFlux[id.x].z += GetFlowValue(current - bottom, cellLength.y);
+    waterFlux[id.x].w += GetFlowValue(current - top, cellLength.y);
+
+    float totalFlow = (waterFlux[id.x].x + waterFlux[id.x].y + waterFlux[id.x].z + waterFlux[id.x].w) * timeStep;
+    float fluid = water[id.x].x * cellLength.x * cellLength.y;
+    float scale = 1.0f;
+    if (totalFlow > 0) scale = min(1.0f, fluid / totalFlow);
+
+    waterFlux[id.x].x *= scale;
+    waterFlux[id.x].y *= scale;
+    waterFlux[id.x].z *= scale;
+    waterFlux[id.x].w *= scale;
+}
+[numthreads(1024, 1, 1)]
+void CalcualteTotalFlow(uint3 id : SV_DispatchThreadID)
+{
+    float left = coords[id.x].x - 1 < 0 ? 0.0f : waterFlux[indices[id.x].x].y;
+    float right = coords[id.x].x + 1 > res.x - 1 ? 0.0f : waterFlux[indices[id.x].y].x;
+    float bottom = coords[id.x].y - 1 < 0 ? 0.0f : waterFlux[indices[id.x].z].w;
+    float top = coords[id.x].y + 1 > res.y - 1 ? 0.0f : waterFlux[indices[id.x].w].z;
+
+    float flowIn = left + right + top + bottom;
+    float flowOut = waterFlux[id.x].x + waterFlux[id.x].y + waterFlux[id.x].z + waterFlux[id.x].w;
+    float totalFlux = timeStep * (flowIn - flowOut);
+
+    water[id.x].y = water[id.x].x + totalFlux / (cellLength.x * cellLength.y);
+}
+
+[numthreads(1024, 1, 1)]
+void CalcualteSedimentFlow(uint3 id : SV_DispatchThreadID)
+{
+    int l = indices[id.x].x;
+    int r = indices[id.x].y;
+    int b = indices[id.x].z;
+    int t = indices[id.x].w;
+
+    float current = heights[id.x].x + sediment[id.x].x;
+    float left = heights[l].x + sediment[l].x;
+    float right = heights[r].x + sediment[r].x;
+    float bottom = heights[b].x + sediment[b].x;
+    float top = heights[t].x + sediment[t].x;
+
+    sedimentFlux[id.x].x += GetFlowValue(current - left, cellLength.x);
+    sedimentFlux[id.x].y += GetFlowValue(current - right, cellLength.x);
+    sedimentFlux[id.x].z += GetFlowValue(current - bottom, cellLength.y);
+    sedimentFlux[id.x].w += GetFlowValue(current - top, cellLength.y);
+
+    float totalFlow = (sedimentFlux[id.x].x + sedimentFlux[id.x].y + sedimentFlux[id.x].z + sedimentFlux[id.x].w) * timeStep;
+    float fluid = sediment[id.x].x * cellLength.x * cellLength.y;
+    float scale = 1.0f;
+    if (totalFlow > 0) scale = min(1.0f, fluid / totalFlow);
+
+    sedimentFlux[id.x].x *= scale;
+    sedimentFlux[id.x].y *= scale;
+    sedimentFlux[id.x].z *= scale;
+    sedimentFlux[id.x].w *= scale;
+}
+[numthreads(1024, 1, 1)]
+void CalcualteSedimentTotalFlow(uint3 id : SV_DispatchThreadID)
+{
+    float left = coords[id.x].x - 1 < 0 ? 0.0f : sedimentFlux[indices[id.x].x].y;
+    float right = coords[id.x].x + 1 > res.x - 1 ? 0.0f : sedimentFlux[indices[id.x].y].x;
+    float bottom = coords[id.x].y - 1 < 0 ? 0.0f : sedimentFlux[indices[id.x].z].w;
+    float top = coords[id.x].y + 1 > res.y - 1 ? 0.0f : sedimentFlux[indices[id.x].w].z;
+
+    float flowIn = left + right + top + bottom;
+    float flowOut = sedimentFlux[id.x].x + sedimentFlux[id.x].y + sedimentFlux[id.x].z + sedimentFlux[id.x].w;
+    float totalFlux = timeStep * (flowIn - flowOut);
+
+    sediment[id.x].y = sediment[id.x].x + totalFlux / (cellLength.x * cellLength.y);
+}
