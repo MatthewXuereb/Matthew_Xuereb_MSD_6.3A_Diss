@@ -1,0 +1,342 @@
+<rdf:RDF
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns:z="http://www.zotero.org/namespaces/export#"
+ xmlns:dcterms="http://purl.org/dc/terms/"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:bib="http://purl.org/net/biblio#"
+ xmlns:foaf="http://xmlns.com/foaf/0.1/">
+    <bib:Article rdf:about="#item_29">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+               <dc:title>Mexico, Ciudad de Mexico</dc:title>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Benes</foaf:surname>
+                        <foaf:givenName>Bedrich</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:title>A Stable Modeling of Large Plant Ecosystems</dc:title>
+        <dcterms:abstract>The focus of this paper is finding a balance of the plant density and the plant spatial distribution
+in visual models of large plant ecosystems. This is achieved by simulating plant competitions for resources that is
+sensitive to many constants and initial conditions, and can easily become unstable causing some individuals to die
+and the others to grow exponentially. We have found that a negative feedback can provide stability able to resolve
+catastrophes and unstable states. The replication and seeding cause plants of the same species to grow in clusters
+that guarantees visual plausibility of the resulting models.</dcterms:abstract>
+        <dc:date>2002</dc:date>
+    </bib:Article>
+    <bib:Article rdf:about="#item_30">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Eurographics / ACM SIGGRAPH Symposium on Computer Animation</dc:title>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Brisbin</foaf:surname>
+                        <foaf:givenName>M</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Stava</foaf:surname>
+                        <foaf:givenName>O</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Bene</foaf:surname>
+                        <foaf:givenName>B</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Kriv</foaf:surname>
+                        <foaf:givenName>J</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:relation rdf:resource="#item_36"/>
+        <dc:relation rdf:resource="#item_35"/>
+        <dc:subject>Main erosion paper</dc:subject>
+        <dc:title>Interactive Terrain Modeling Using Hydraulic Erosion</dc:title>
+        <dcterms:abstract>We present a step toward interactive physics-based modeling of terrains. A terrain, composed of layers of materi-
+als, is edited with interactive modeling tools built upon different physics-based erosion and deposition algorithms.
+First, two hydraulic erosion algorithms for running water are coupled. Areas where the motion is slow become
+more eroded by the dissolution erosion, whereas in the areas with faster motion, the force-based erosion prevails.
+Second, when the water under-erodes certain areas, slippage takes effect and the river banks fall into the water.
+A variety of local and global editing operation is provided. The user has a great level of control over the process
+and receives immediate feedback since the GPU-based erosion simulation runs at least at 20 fps on off-the-shelf
+computers for scenes with grid resolution of 2048 × 1024 and four layers of material. We also present a divide
+and conquer approach to handle large terrain erosion, where the terrain is tiled, and each tile calculated inde-
+pendently on the GPU. We show a wide variety of erosion-based modeling features such as forming rivers, drying
+flooded areas, rain, interactive manipulation with rivers, spring, adding obstacles into the water, etc.</dcterms:abstract>
+        <dc:date>2008</dc:date>
+    </bib:Article>
+    <bib:Article rdf:about="#item_31">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+               <dc:title>Germany, University of Munich</dc:title>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Weiss</foaf:surname>
+                        <foaf:givenName>S</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Bayer</foaf:surname>
+                        <foaf:givenName>F</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Westermann</foaf:surname>
+                        <foaf:givenName>R</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:title>Triplanar Displacement Mapping for Terrain Rendering</dc:title>
+        <dcterms:abstract>Heightmap-based terrain representations are common in computer games and simulations. However, adding geometric details to
+such a representation during rendering on the GPU is difficult to achieve. In this paper, we propose a combination of triplanar
+mapping, displacement mapping, and tessellation on the GPU, to create extruded geometry along steep faces of heightmap-based
+terrain fields on-the-fky during rendering. The method allows rendering geometric details such as overhangs and boulders,
+without explicit triangulation. We further demonstrate how to handle collisions and shadows for the enriched geometry.</dcterms:abstract>
+        <dc:date>2020</dc:date>
+    </bib:Article>
+    <bib:Article rdf:about="#item_32">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+           <bib:Journal><dc:title>SIGGRAPH</dc:title></bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Andersson</foaf:surname>
+                        <foaf:givenName>Johan</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:title>Terrain Rendering in Frostbite using Procedural shader splatting</dc:title>
+        <dc:date>2007</dc:date>
+        <bib:pages>46-54</bib:pages>
+    </bib:Article>
+    <bib:Article rdf:about="#item_33">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Crotia, International Convention on Information and Com- munication Technology, Electronics and Microelec- tronics (MIPRO)</dc:title>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Mikuličić</foaf:surname>
+                        <foaf:givenName>N</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Mihajlović</foaf:surname>
+                        <foaf:givenName>Z</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Main inspiration for the prototype</dc:subject>
+        <dc:title>Procedural Generation of Mediterranean Environment</dc:title>
+        <dcterms:abstract>This paper describes an overall process of
+procedural generation of natural environments through
+terrain generation, texturing and scattering of terrain cover.
+Although described process can be used to create various
+types of environments, focus of this paper has been put on
+Mediterranean which is somewhat specific and has not yet
+received any attention in scientific papers. We present a
+novel technique for procedural texturing and scattering of
+terrain cover based on cascading input parameters. Input
+parameters can be used to scatter vegetation simply by slope
+and height of the terrain, but they can also be easily
+extended and combined to use more advanced parameters
+such as wind maps, moisture maps, per plant distribution
+maps etc. Additionally, we present a method for using a
+satellite image as an input parameter. Comparing results
+with real-life images shows that our approach can create
+plausible, visually appealing landscapes.</dcterms:abstract>
+        <dc:date>2016</dc:date>
+    </bib:Article>
+    <bib:Article rdf:about="#item_34">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+               <dc:title>Canada, Ontario Alias wavefront</dc:title>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Stam</foaf:surname>
+                        <foaf:givenName>Jos</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Used to implement fluid simualtion</dc:subject>
+        <dc:title>Real-Time Fluid Dynamics for Games</dc:title>
+        <dcterms:abstract>In this paper we present a simple and rapid implementation of a fluid dynamics solver for game
+engines. Our tools can greatly enhance games by providing realistic fluid-like effects such as
+swirling smoke past a moving character. The potential applications are endless. Our algorithms
+are based on the physical equations of fluid flow, namely the Navier-Stokes equations. These
+equations are notoriously hard to solve when strict physical accuracy is of prime importance.
+Our solvers on the other hand are geared towards visual quality. Our emphasis is on stability
+and speed, which means that our simulations can be advanced with arbitrary time steps. We
+also demonstrate that our solvers are easy to code by providing a complete C code
+implementation in this paper. Our algorithms run in real-time for reasonable grid sizes in both
+two and three dimensions on standard PC hardware, as demonstrated during the presentation
+of this paper at the conference.</dcterms:abstract>
+        <dc:date>2003</dc:date>
+    </bib:Article>
+    <bib:Article rdf:about="#item_35">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>United States, Pacific Conference on Computer Graphics and Applications</dc:title>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Mei</foaf:surname>
+                        <foaf:givenName>Xing</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Decaudin</foaf:surname>
+                        <foaf:givenName>Philippe</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:relation rdf:resource="#item_30"/>
+        <dc:relation rdf:resource="#item_36"/>
+        <dc:title>Fast Hydraulic Erosion Simulation and Visualization on GPU</dc:title>
+        <dcterms:abstract>Natural mountains and valleys are gradually eroded by
+rainfall and river flows. Physically-based modeling of this
+complex phenomenon is a major concern in producing re-
+alistic synthesized terrains. However, despite some recent
+improvements, existing algorithms are still computationally
+expensive, leading to a time-consuming process fairly im-
+practical for terrain designers and 3D artists.
+In this paper, we present a new method to model the hy-
+draulic erosion phenomenon which runs at interactive rates
+on today’s computers. The method is based on the velocity
+field of the running water, which is created with an efficient
+shallow-water fluid model. The velocity field is used to cal-
+culate the erosion and deposition process, and the sediment
+transportation process. The method has been carefully de-
+signed to be implemented totally on GPU, and thus takes
+full advantage of the parallelism of current graphics hard-
+ware. Results from experiments demonstrate that the pro-
+posed method is effective and efficient. It can create realis-
+tic erosion effects by rainfall and river flows, and produce
+fast simulation results for terrains with large sizes.</dcterms:abstract>
+        <dc:date>2011</dc:date>
+    </bib:Article>
+    <bib:Article rdf:about="#item_36">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Hungary, Budapest University of Technology and Economics</dc:title>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Jako</foaf:surname>
+                        <foaf:givenName>Balazs</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:relation rdf:resource="#item_30"/>
+        <dc:relation rdf:resource="#item_35"/>
+        <dc:title>Fast Hydraulic and Thermal Erosion on the GPU</dc:title>
+        <dcterms:abstract>Computer games, TV series, movies, simulators, and
+many other computer graphics applications use external
+scenes where a realistic looking terrain is a vital part of
+the viewing experience. Creating such terrains is a chal-
+lenging task. In this paper we propose a method that gen-
+erates realistic virtual terrains by simulation of hydraulic
+and thermal erosion on a predefined height field terrain.
+The model is designed to be executed interactively on par-
+allel architectures like graphics processors.</dcterms:abstract>
+        <dc:date>2011</dc:date>
+    </bib:Article>
+    <bib:Article rdf:about="#item_37">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+               <dc:title>Germany, University of Munich</dc:title>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Beyer</foaf:surname>
+                        <foaf:givenName>Hans Theobald</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Discussed in Literture review about simualting fluid as a particle</dc:subject>
+        <dc:title>Implementation of a method for hydraulic erosion</dc:title>
+        <dcterms:abstract>The creation of realistic looking terrains is an important part in the movie industry as
+well as in computer games and simulations. Realistic and visually appealing landscapes
+help the consumer to immerse themselves in the virtual world. One of the greatest
+challenges of generating terrain are the effects of erosion. Those effects can be found
+everywhere in nature and are a vital part of natural looking terrain.
+After a foundational research in the field of erosion algorithms, I wrote an highly
+adaptable algorithm to simulate hydraulic erosion on a heightfield. This algorithm
+excels through its various parameters, which allow several results for the same input.
+Through its interactivity it allows the user to erode the terrain according to its needs.</dcterms:abstract>
+        <dc:date>2015</dc:date>
+    </bib:Article>
+    <z:Collection rdf:about="#collection_7">
+        <dc:title>Fluids</dc:title>
+        <dcterms:hasPart rdf:resource="#item_30"/>
+        <dcterms:hasPart rdf:resource="#item_34"/>
+        <dcterms:hasPart rdf:resource="#item_35"/>
+        <dcterms:hasPart rdf:resource="#item_36"/>
+        <dcterms:hasPart rdf:resource="#item_37"/>
+    </z:Collection>
+    <z:Collection rdf:about="#collection_8">
+        <dc:title>Rendering</dc:title>
+        <dcterms:hasPart rdf:resource="#item_29"/>
+        <dcterms:hasPart rdf:resource="#item_31"/>
+        <dcterms:hasPart rdf:resource="#item_32"/>
+        <dcterms:hasPart rdf:resource="#item_33"/>
+    </z:Collection>
+</rdf:RDF>
